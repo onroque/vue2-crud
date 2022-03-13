@@ -16,6 +16,9 @@ export default new Vuex.Store({
         },
         setTarea(state, payload) {
             state.tarea = payload;
+        },
+        setEliminarTarea(state, payload) {
+            state.tareas = state.tareas.filter(item => item.id !== payload);
         }
     },
     actions: {
@@ -58,8 +61,17 @@ export default new Vuex.Store({
                 nombre: nombreTarea
             }).then(doc => {
                 console.log(doc.id);
-                router.push('/')
+                router.push('/');
             });
+        },
+
+        eliminarTarea({commit, dispatch}, idTarea) {
+            db.collection('tareas').doc(idTarea).delete()
+                .then(() => {
+                    console.log(`Tarea ${idTarea} eliminada.`);
+                    //dispatch('getTareas');
+                    commit('setEliminarTarea', idTarea);
+                });
         }
     },
     modules: {}

@@ -2,9 +2,16 @@
     <div>
         {{ tarea.id }} - {{ tarea.nombre }}
         <h1>Editar</h1>
-        <form @submit.prevent="editarTarea(tarea)">
-            <input type="text" v-model="tarea.nombre">
-            <button type="submit">Editar</button>
+        <form
+            class="form-inline"
+            @submit.prevent="editarTarea(tarea)">
+            <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Nombre</div>
+                </div>
+                <input v-model="tarea.nombre" class="form-control" type="text">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Editar</button>
         </form>
     </div>
 </template>
