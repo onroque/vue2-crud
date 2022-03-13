@@ -51,6 +51,15 @@ export default new Vuex.Store({
                     console.log('Tarea editada.');
                     router.push('/');
                 });
+        },
+
+        agregarTarea({commit}, nombreTarea) {
+            db.collection('tareas').add({
+                nombre: nombreTarea
+            }).then(doc => {
+                console.log(doc.id);
+                router.push('/')
+            });
         }
     },
     modules: {}
